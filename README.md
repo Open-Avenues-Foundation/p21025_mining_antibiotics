@@ -335,16 +335,14 @@ Questions:
 
 Solution:
 > How to find the Malformin gene cluster in Aspergillus tubingensis:
-# https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0140069
-# See e.g. https://pubchem.ncbi.nlm.nih.gov/compound/Malformin-A#section=3D-Status Malformin A
+* https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0140069
+* See e.g. https://pubchem.ncbi.nlm.nih.gov/compound/Malformin-A#section=3D-Status Malformin A
 
 Malformin is a pentapeptide, thus we can infer NRPS-size as a criterium:
 *  Cys-Cys-Val-Leu-eIle
 <!-- * cyclo[DL-cysteinyl-DL-cysteinyl-DL-valyl-DL-leucyl-DL-isoleucyl] (1->2)-disulfide -->
-# NRPS proteins have an AMP-binding domain. Try to search for it
+* NRPS proteins have an AMP-binding domain. Try to search for it
 
-# df_tubingensis_sub.size  total number of AMP-binding containing proteins
-# solution: https://antismash-db.secondarymetabolites.org/output/GCF_013340325.1/index.html#r5c3
 
 Python code (partial)
 
@@ -358,6 +356,9 @@ df_tubingensis['org'] = 'A. tubingensis'
 df_tubingensis_sub = df_tubingensis[df_tubingensis.sec_met_domain.str.contains('AMP-binding', na=False)][['locus_tag', 'contig_id', 'protein_id', 'translation']]
 
 df_tubingensis_sub['nrps_length'] = df_tubingensis_sub.translation.str.len()  # length should be 4-5 * 1200 AA for each module
+
+# df_tubingensis_sub.size  total number of AMP-binding containing proteins
+# solution: https://antismash-db.secondarymetabolites.org/output/GCF_013340325.1/index.html#r5c3
 
 df_tubingensis_sub[
     df_tubingensis_sub['nrps_length'] > 5000
